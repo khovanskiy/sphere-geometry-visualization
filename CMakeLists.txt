@@ -58,4 +58,8 @@ add_executable(${PROJECT} ${HEADERS} ${SOURCES})
 qt5_use_modules(${PROJECT} Core Gui Widgets OpenGL)
 
 # Fix OpenGL "undefined reference" problem
-target_link_libraries(${PROJECT} OpenGL32)
+if( WIN32 )
+    target_link_libraries(${PROJECT} OpenGL32)
+else()
+    target_link_libraries(${PROJECT} GL)
+endif()
