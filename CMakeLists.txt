@@ -50,12 +50,17 @@ sources/random.cpp
 SET(CMAKE_CXX_FLAGS "-std=c++11")
 
 # Build & Compile
-add_executable(${PROJECT} ${HEADERS} ${SOURCES})
+# Executable:
+#add_executable(${PROJECT} ${HEADERS} ${SOURCES})
+# Or library:
+add_library(${PROJECT} ${HEADERS} ${SOURCES})
+
+qt5_use_modules(${PROJECT} Core Gui Widgets OpenGL)
 
 #target_link_libraries(${PROJECT} ${OPENGL_LIBRARIES} ${QT_LIBRARIES})
 
 # Add qt modules (IMPORTTANT! this must be after add_executable)
-qt5_use_modules(${PROJECT} Core Gui Widgets OpenGL)
+
 
 # Fix OpenGL "undefined reference" problem
 if( WIN32 )
@@ -63,3 +68,5 @@ if( WIN32 )
 else()
     target_link_libraries(${PROJECT} GL)
 endif()
+
+#target_link_libraries(${PROJECT} )
